@@ -15,6 +15,7 @@ import java.util.Set;
 @Table(name = "albums")
 public class Album {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String naam;
     private int jaar;
@@ -29,7 +30,20 @@ public class Album {
     @ElementCollection
     @CollectionTable(name = "tracks",
     joinColumns = @JoinColumn(name = "albumId"))
-    private Set<Track> tracks = new LinkedHashSet<>();
+    private Set<Track> tracks;
+
+    public Album(String naam, int jaar, long barcode, int score, Artiest artiest, Label label) {
+        this.naam = naam;
+        this.jaar = jaar;
+        this.barcode = barcode;
+        this.score = score;
+        this.artiest = artiest;
+        this.label = label;
+        this.tracks = new LinkedHashSet<>();
+    }
+
+    protected Album() {
+    }
 
     public long getId() {
         return id;

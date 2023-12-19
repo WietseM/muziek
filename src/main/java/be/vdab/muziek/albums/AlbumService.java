@@ -34,4 +34,5 @@ class AlbumService {
         albumRepository.findAndLockById(id).orElseThrow(AlbumNietGevondenException::new).setScore(score);
     }
 
+
 }

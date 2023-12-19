@@ -2,10 +2,9 @@ package be.vdab.muziek.artiesten;
 
 import be.vdab.muziek.albums.Album;
 import be.vdab.muziek.albums.AlbumRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import be.vdab.muziek.albums.NieuwAlbum;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -36,6 +35,11 @@ public class ArtiestController {
                 .orElseThrow(ArtiestNietGevondenException::new)
                 .stream()
                 .map(AlbumsBeknopt::new);
+    }
+
+    @PostMapping("{artiestId}")
+    void voegAlbumToeAanArtiest(@PathVariable long artiestId, @RequestBody @Valid NieuwAlbum nieuwAlbum){
+        artiestService.voegAlbumToeAanArtiest(artiestId, nieuwAlbum);
     }
 
 

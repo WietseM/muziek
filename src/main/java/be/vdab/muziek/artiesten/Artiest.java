@@ -28,4 +28,8 @@ public class Artiest {
     public Set<Album> getAlbums() {
         return Collections.unmodifiableSet(albums);
     }
+
+    public void voegAlbumToe(Album album){
+        albums.add(album);
+    }
 }
