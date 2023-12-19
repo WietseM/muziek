@@ -16,16 +16,16 @@ import java.util.Set;
 public class Album {
     @Id
     private long id;
+    private String naam;
+    private int jaar;
+    private long barcode;
+    private int score;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "artiestId")
     private Artiest artiest;
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "labelId")
     private Label label;
-    private String naam;
-    private int jaar;
-    private long barcode;
-    private int score;
     @ElementCollection
     @CollectionTable(name = "tracks",
     joinColumns = @JoinColumn(name = "albumId"))
@@ -63,6 +63,10 @@ public class Album {
         return Collections.unmodifiableSet(tracks);
     }
 
+    public void setScore(int score) {
+        this.score = score;
+        System.out.println(score);
+    }
 
     public LocalTime totaleTijd(){
         return tracks.stream()

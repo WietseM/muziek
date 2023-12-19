@@ -29,4 +29,9 @@ class AlbumService {
         return albumRepository.findByJaarOrderByNaam(jaar);
     }
 
+    @Transactional
+    public void wijzigScore(long id, int score){
+        albumRepository.findAndLockById(id).orElseThrow(AlbumNietGevondenException::new).setScore(score);
+    }
+
 }
